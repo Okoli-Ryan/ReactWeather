@@ -1,9 +1,20 @@
 const express = require('express');
 
 const app = express();
-console.log(__dirname);
+const PORT = process.env.PORT || 3000;
+
+app.use(function (req, res, next){
+    if(req.headers['x-forwarded-proto'] === 'http'){
+        next();
+    }
+    else
+        {
+        res.redirect('http://' + req.hostname + req.url);
+    }
+});
+
 app.use(express.static('static'));
 
-app.listen(3000, function () {
-    console.log('app started on prt 3000');
+app.listen(port, function () {
+    console.log('app started on port ' + PORT);
 });
