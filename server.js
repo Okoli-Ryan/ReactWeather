@@ -15,6 +15,6 @@ app.use(function (req, res, next){
 
 app.use(express.static('static'));
 
-app.listen(port, function () {
+app.listen(PORT, function () {
     console.log('app started on port ' + PORT);
 });
