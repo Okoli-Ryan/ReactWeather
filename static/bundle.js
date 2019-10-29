@@ -25925,7 +25925,7 @@
 	        var requestUrl = OPEN_WEATHER_MAP_URL + '&q=' + encodedLocation;
 
 	        return axios.get(requestUrl).then(function (response) {
-	            if (response.data.cod && response.data.message) {
+	            if (response.data.code && response.data.message) {
 	                throw new Error(response.data.message);
 	            } else {
 	                return response.data.main.temp;
@@ -27506,9 +27506,18 @@
 	    displayName: 'Examples',
 	    render: function render() {
 	        return React.createElement(
-	            'h3',
+	            'div',
 	            null,
-	            'Examples Component'
+	            React.createElement(
+	                'h3',
+	                null,
+	                'Examples'
+	            ),
+	            React.createElement(
+	                'p',
+	                null,
+	                'Welcome'
+	            )
 	        );
 	    }
 	});
