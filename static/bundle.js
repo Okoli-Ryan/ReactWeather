@@ -25775,11 +25775,14 @@
 	            null,
 	            React.createElement(Nav, null),
 	            React.createElement(
-	                'h2',
-	                null,
-	                'Main Component'
-	            ),
-	            this.props.children
+	                'div',
+	                { className: 'row' },
+	                React.createElement(
+	                    'div',
+	                    { className: 'columns medium-6 large-4 small-centered' },
+	                    this.props.children
+	                )
+	            )
 	        );
 	    }
 	});
@@ -25800,6 +25803,11 @@
 
 	var nav = React.createClass({
 	    displayName: 'nav',
+
+	    onSearch: function onSearch(e) {
+	        e.preventDefault();
+	    },
+
 	    render: function render() {
 	        return React.createElement(
 	            'div',
@@ -25844,7 +25852,28 @@
 	                    )
 	                )
 	            ),
-	            React.createElement('div', { className: 'top-bar-right' })
+	            React.createElement(
+	                'div',
+	                { className: 'top-bar-right' },
+	                React.createElement(
+	                    'form',
+	                    { onSubmit: this.onSearch },
+	                    React.createElement(
+	                        'ul',
+	                        { className: 'menu' },
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement('input', { type: 'search', placeholder: 'Search weather' })
+	                        ),
+	                        React.createElement(
+	                            'li',
+	                            null,
+	                            React.createElement('input', { type: 'submit', className: 'button', value: 'get-weather' })
+	                        )
+	                    )
+	                )
+	            )
 	        );
 	    }
 	});
