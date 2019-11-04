@@ -105,11 +105,11 @@
 
 	var Main = __webpack_require__(236);
 	var Weather = __webpack_require__(238);
-	var About = __webpack_require__(268);
-	var Examples = __webpack_require__(269);
+	var About = __webpack_require__(269);
+	var Examples = __webpack_require__(270);
 
 	//Load foundation
-	__webpack_require__(270);
+	__webpack_require__(271);
 	$(document).foundation();
 
 	ReactDOM.render(React.createElement(
@@ -25890,6 +25890,7 @@
 	var Weather_Form = __webpack_require__(239);
 	var Weather_Text = __webpack_require__(240);
 	var openWeatherMap = __webpack_require__(241);
+	var ErrorModal = __webpack_require__(268);
 
 	var weather = React.createClass({
 	    displayName: 'weather',
@@ -25903,7 +25904,8 @@
 	    handleSearch: function handleSearch(location) {
 	        var that = this;
 
-	        this.setState({ isLoading: true });
+	        this.setState({ isLoading: true,
+	            errorMessage: undefined });
 
 	        openWeatherMap.getTemp(location).then(function (temp) {
 	            that.setState({
@@ -25912,8 +25914,8 @@
 	                isLoading: false
 	            });
 	        }, function (err) {
-	            that.setState({ isLoading: false });
-	            alert(err);
+	            that.setState({ isLoading: false,
+	                errorMessage: err.message });
 	        });
 	    },
 
@@ -25921,7 +25923,8 @@
 	        var _state = this.state,
 	            isLoading = _state.isLoading,
 	            temp = _state.temp,
-	            location = _state.location;
+	            location = _state.location,
+	            errorMessage = _state.errorMessage;
 
 
 	        function renderMessage() {
@@ -25935,6 +25938,13 @@
 	                return React.createElement(Weather_Text, { location: location, temp: temp });
 	            }
 	        }
+
+	        function renderError() {
+	            if (typeof errorMessage === "string") {
+	                return React.createElement(ErrorModal, { message: errorMessage });
+	            }
+	        }
+
 	        return React.createElement(
 	            'div',
 	            null,
@@ -25944,7 +25954,8 @@
 	                'Weather Component'
 	            ),
 	            React.createElement(Weather_Form, { onSearch: this.handleSearch }),
-	            renderMessage()
+	            renderMessage(),
+	            renderError()
 	        );
 	    }
 	});
@@ -26033,7 +26044,7 @@
 	        var requestUrl = OPEN_WEATHER_MAP_URL + '&q=' + encodedLocation;
 
 	        return axios.get(requestUrl).then(function (response) {
-	            if (response.data.code && response.data.message) {
+	            if (response.data.cod && response.data.message) {
 	                throw new Error(response.data.message);
 	            } else {
 	                return response.data.main.temp;
@@ -27585,6 +27596,65 @@
 /* 268 */
 /***/ function(module, exports, __webpack_require__) {
 
+	/* WEBPACK VAR INJECTION */(function($) {'use strict';
+
+	var React = __webpack_require__(8);
+	var ErrorModal = React.createClass({
+	    displayName: 'ErrorModal',
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            title: 'Error'
+	        };
+	    },
+	    propTypes: function propTypes() {
+	        return {
+	            title: React.PropTypes.string,
+	            message: React.PropTypes.string.isRequired
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var modal = new Foundation.Reveal($('#error-modal'));
+	        modal.open();
+	    },
+	    render: function render() {
+	        var _props = this.props,
+	            title = _props.title,
+	            message = _props.message;
+
+	        return React.createElement(
+	            'div',
+	            { id: 'error-modal', className: 'reveal tiny text-center', 'data-reveal': '' },
+	            React.createElement(
+	                'h4',
+	                null,
+	                title,
+	                'e'
+	            ),
+	            React.createElement(
+	                'p',
+	                null,
+	                message
+	            ),
+	            React.createElement(
+	                'p',
+	                null,
+	                React.createElement(
+	                    'button',
+	                    { className: 'button hollow', 'data-close': '' },
+	                    'Okay'
+	                )
+	            )
+	        );
+	    }
+	});
+
+	module.exports = ErrorModal;
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
 	var React = __webpack_require__(8);
@@ -27603,7 +27673,7 @@
 	module.exports = about;
 
 /***/ },
-/* 269 */
+/* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27633,16 +27703,16 @@
 	module.exports = Examples;
 
 /***/ },
-/* 270 */
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(271);
+	var content = __webpack_require__(272);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(273)(content, {});
+	var update = __webpack_require__(274)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -27659,10 +27729,10 @@
 	}
 
 /***/ },
-/* 271 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(272)();
+	exports = module.exports = __webpack_require__(273)();
 	// imports
 
 
@@ -27673,7 +27743,7 @@
 
 
 /***/ },
-/* 272 */
+/* 273 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27728,7 +27798,7 @@
 	};
 
 /***/ },
-/* 273 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
