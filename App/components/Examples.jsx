@@ -3,8 +3,8 @@ var React = require('react');
 var Examples = React.createClass({
     render (){
         return(
-            <div>
-            <h3>Examples</h3>
+            <div className="text-center">
+            <h3 className="page-title">Examples</h3>
                 <p>Welcome</p>
             </div>
         )

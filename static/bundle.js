@@ -112,6 +112,9 @@
 	__webpack_require__(271);
 	$(document).foundation();
 
+	//App css
+	__webpack_require__(275);
+
 	ReactDOM.render(React.createElement(
 	            Router,
 	            { history: hashHistory },
@@ -25950,7 +25953,7 @@
 	            null,
 	            React.createElement(
 	                'h3',
-	                null,
+	                { className: 'text-center page-title' },
 	                'Weather Component'
 	            ),
 	            React.createElement(Weather_Form, { onSearch: this.handleSearch }),
@@ -25991,7 +25994,7 @@
 	        return React.createElement(
 	            'form',
 	            { onSubmit: this.onFormSubmit },
-	            React.createElement('input', { type: 'text', placeholder: 'Enter City', style: style, ref: 'location' }),
+	            React.createElement('input', { type: 'search', placeholder: 'Search Weather', style: style, ref: 'location' }),
 	            React.createElement(
 	                'button',
 	                { type: 'submit', style: style2 },
@@ -27627,8 +27630,7 @@
 	            React.createElement(
 	                'h4',
 	                null,
-	                title,
-	                'e'
+	                title
 	            ),
 	            React.createElement(
 	                'p',
@@ -27655,17 +27657,17 @@
 /* 269 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 
 	var about = React.createClass({
-	    displayName: 'about',
+	    displayName: "about",
 	    render: function render() {
 	        return React.createElement(
-	            'h3',
-	            null,
-	            'About Component'
+	            "h3",
+	            { className: "text-center page-title" },
+	            "About Component"
 	        );
 	    }
 	});
@@ -27676,25 +27678,25 @@
 /* 270 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 
 	var React = __webpack_require__(8);
 
 	var Examples = React.createClass({
-	    displayName: 'Examples',
+	    displayName: "Examples",
 	    render: function render() {
 	        return React.createElement(
-	            'div',
-	            null,
+	            "div",
+	            { className: "text-center" },
 	            React.createElement(
-	                'h3',
-	                null,
-	                'Examples'
+	                "h3",
+	                { className: "page-title" },
+	                "Examples"
 	            ),
 	            React.createElement(
-	                'p',
+	                "p",
 	                null,
-	                'Welcome'
+	                "Welcome"
 	            )
 	        );
 	    }
@@ -28049,6 +28051,46 @@
 		if(oldSrc)
 			URL.revokeObjectURL(oldSrc);
 	}
+
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+
+	// load the styles
+	var content = __webpack_require__(276);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(274)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!../../node_modules/css-loader/index.js!./App.css", function() {
+				var newContent = require("!!../../node_modules/css-loader/index.js!./App.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(273)();
+	// imports
+
+
+	// module
+	exports.push([module.id, ".page-title {\r\n    margin-top: 2.5rem;\r\n    margin-bottom: 2.5rem;\r\n}\r\n\r\ninput[type=search]{\r\n    box-shadow: none;\r\n}", ""]);
+
+	// exports
 
 
 /***/ }
