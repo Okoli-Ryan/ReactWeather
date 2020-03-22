@@ -5,7 +5,7 @@ var style2 = {position: 'relative', top: '38%', left: '50%', transform: 'transla
 
 var Weather_Form = React.createClass({
 
-    onFormSubmit: function(e){
+    onFormSubmit(){
         e.preventDefault();
 
         var location = this.refs.location.value;

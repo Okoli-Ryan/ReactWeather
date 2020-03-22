@@ -32,7 +32,6 @@ var weather = React.createClass({
                 errorMessage: err.message});
             })
 
-
     },
 
     componentWillReceiveProps(newProps){
